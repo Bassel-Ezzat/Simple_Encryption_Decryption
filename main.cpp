@@ -7,6 +7,21 @@ string CaesarEnc (string msg , int key);
 string CaesarDec (string dec , int key);
 
 int main () {
+    int Enc_choice;
+    cout << "Choose The Encryption method :" << endl
+    << "1- Caeser Cipher" << endl << "2- XOR Cipher" << endl
+    << "3- Vigenere Cipher" << endl;
+    cin >> Enc_choice;
+    cin.ignore();
+    if (Enc_choice == 1) {
+        string msg ;
+        int key;
+        cout << "Enter the text you want to encrypt:" ;
+        getline(cin , msg);
+        cout << "Enter the encryption key:";
+        cin >> key;
+        cout << CaesarEnc(msg , key);
+    }
 
 }
 
