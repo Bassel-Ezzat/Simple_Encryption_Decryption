@@ -63,7 +63,7 @@ int main () {
         int Dec_choice;
         cout << "Choose Which Cipher You Want To Decrypt:" << endl
         <<"1- Caesar Cipher" << endl << "2- XOR Cipher" << endl
-        << "3- Vigenere Cipher" << endl;
+        << "3- Vigenere Cipher" << endl << "4- Atbash Cipher" << endl;
         cin >> Dec_choice;
         cin.ignore();
         if (Dec_choice == 1) {
@@ -142,6 +142,7 @@ string CaesarEnc (string msg , int key) {
     return msg;
 }
 
+
 // Caesar Cipher Decryption
 string CaesarDec (string dec , int key) {
 
@@ -166,6 +167,8 @@ string XOREncDec (string msg , int key) {
     return msg;
 }
 
+
+//Vigernere Encryption
 string VigenèreEnc (string msg , string key) {
 
     for (int i = 0 ; i < key.size() ; i++) {
@@ -188,6 +191,8 @@ string VigenèreEnc (string msg , string key) {
     return msg;
 }
 
+
+//Vigernere Encryption
 string VigenèreDec (string msg , string key) {
 
     for (int i = 0 ; i < key.size() ; i++) {
@@ -210,6 +215,8 @@ string VigenèreDec (string msg , string key) {
     return msg;
 }
 
+
+//Atbash Encryption and Decryption
 string AtbashEncDec (string msg) {
 
     for (int i = 0 ; i < msg.size() ; i++) {
