@@ -31,14 +31,8 @@ int main () {
         if (Enc_choice == 2) {
             string msg, line;
             int key;
-            cout << "(Note : Enter an additional space to confirm that the message ended)";
             cout << "Enter the text you want to encrypt:" ;
-            while (getline(cin, line) && !line.empty()) {
-                msg += line + '\n';
-            }
-            if (!msg.empty() && msg.back() == '\n') {
-                msg.pop_back();
-            }
+            getline(cin , msg);
             cout << "Enter the encryption key:";
             cin >> key;
             cout << XOREncDec(msg, key);
@@ -63,7 +57,7 @@ int main () {
         if (Dec_choice == 2) {
             string msg, line;
             int key;
-            cout << "(Note : Enter an additional space to confirm that the message ended)";
+            cout << "(Note : Enter an additional space to confirm that the message ended)" << endl;;
             cout << "Enter the message you want to decrypt:" ;
             while (getline(cin, line) && !line.empty()) {
                 msg += line + '\n';
