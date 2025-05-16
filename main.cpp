@@ -16,104 +16,133 @@ string AtbashEncDec (string msg);
 
 int main () {
     int EncorDec;
+    string msg;
+    bool flag1 = true , flag2 = true , flag3 = true;
     cout << "1- Encrypt" << endl << "2- Decrypt" << endl;
-    cin >> EncorDec;
-    if (EncorDec == 1) {
-        int Enc_choice;
-        cout << "Choose The Encryption method :" << endl
-        << "1- Caesar Cipher" << endl << "2- XOR Cipher" << endl
-        << "3- Vigenere Cipher" << endl << "4- Atbash Cipher" << endl;
-        cin >> Enc_choice;
-        cin.ignore();
-        if (Enc_choice == 1) {
-            string msg ;
-            int key;
-            cout << "Enter the text you want to encrypt:" ;
-            getline(cin , msg);
-            cout << "Enter the encryption key:";
-            cin >> key;
-            cout << CaesarEnc(msg , key);
+    while (flag1) {
+        cin >> EncorDec;
+        if (EncorDec == 1) {
+            flag1 = false;
+            int Enc_choice;
+            cout << "Choose The Encryption method :" << endl
+            << "1- Caesar Cipher" << endl << "2- XOR Cipher" << endl
+            << "3- Vigenère Cipher" << endl << "4- Atbash Cipher" << endl;
+            while (flag2){
+                cin >> Enc_choice;
+                cin.ignore();
+                if (Enc_choice == 1) {
+                    flag2 = false;
+                    int key;
+                    cout << "[CAESAR CIPHER]" << endl;
+                    cout << "Enter the text you want to encrypt:" ;
+                    getline(cin , msg);
+                    cout << "(Note : The key must be a number)";
+                    cout << "Enter the encryption key:";
+                    cin >> key;
+                    cout << CaesarEnc(msg , key);
+                }
+                else if (Enc_choice == 2) {
+                    flag2 = false;
+                    string line;
+                    int key;
+                    cout << "[XOR CIPHER]" << endl;
+                    cout << "Enter the text you want to encrypt:" ;
+                    getline(cin , msg);
+                    cout << "(Note : The key must be a number)";
+                    cout << "Enter the encryption key:";
+                    cin >> key;
+                    cout << XOREncDec(msg, key);
+                }
+                else if (Enc_choice == 3) {
+                    flag2 = false;
+                    string key;
+                    cout << "[VIGENÈRE CIPHER]" << endl;
+                    cout << "Enter the text you want to encrypt:" ;
+                    getline(cin , msg);
+                    cout << "(Note : The key must consist of letters)" << endl;
+                    cout << "Enter the encryption key:";
+                    getline(cin , key);
+                    cout << VigenèreEnc(msg , key);
+                }
+                else if (Enc_choice == 4) {
+                    flag2 = false;
+                    cout << "[ATBASH CIPHER]" << endl;
+                    cout << "Enter the text you want to encrypt:";
+                    getline(cin , msg);
+                    cout << AtbashEncDec (msg);
+                }
+                else {
+                    cout << "Enter a valid number :";
+                }
         }
-        else if (Enc_choice == 2) {
-            string msg, line;
-            int key;
-            cout << "Enter the text you want to encrypt:" ;
-            getline(cin , msg);
-            cout << "Enter the encryption key:";
-            cin >> key;
-            cout << XOREncDec(msg, key);
         }
-        else if (Enc_choice == 3) {
-            string msg , key;
-            cout << "Enter the text you want to encrypt:" ;
-            getline(cin , msg);
-            cout << "(Note : The key must be consisting of letters)" << endl;
-            cout << "Enter the encryption key:";
-            getline(cin , key);
-            cout << VigenèreEnc(msg , key);
-        }
-        else if (Enc_choice == 4) {
-            string msg;
-            cout << "Enter the text you want to encrypt:";
-            getline(cin , msg);
-            cout << AtbashEncDec (msg);
-        }
-    }
-    else if (EncorDec == 2) {
-        int Dec_choice;
-        cout << "Choose Which Cipher You Want To Decrypt:" << endl
-        <<"1- Caesar Cipher" << endl << "2- XOR Cipher" << endl
-        << "3- Vigenere Cipher" << endl << "4- Atbash Cipher" << endl;
-        cin >> Dec_choice;
-        cin.ignore();
-        if (Dec_choice == 1) {
-            int key ;
-            string msg;
-            cout << "Enter the message you want to decrypt:" ;
-            getline(cin , msg);
-            cout << "Enter the decryption key:";
-            cin >> key;
-            cout << CaesarDec(msg , key);
-        }
-        else if (Dec_choice == 2) {
-            string msg, line;
-            int key;
-            cout << "(Note : Enter an additional space to confirm that the message ended)" << endl;;
-            cout << "Enter the message you want to decrypt:" ;
-            while (getline(cin, line) && !line.empty()) {
-                msg += line + '\n';
+        else if (EncorDec == 2) {
+            flag1 = false;
+            int Dec_choice;
+            cout << "Choose Which Cipher You Want To Decrypt:" << endl
+            <<"1- Caesar Cipher" << endl << "2- XOR Cipher" << endl
+            << "3- Vigenere Cipher" << endl << "4- Atbash Cipher" << endl;
+            while (flag3) {
+                cin >> Dec_choice;
+                cin.ignore();
+                if (Dec_choice == 1) {
+                    flag3 = false;
+                    int key ;
+                    cout << "[CAESAR CIPHER]" << endl;
+                    cout << "Enter the message you want to decrypt:" ;
+                    getline(cin , msg);
+                    cout << "(Note : The key must be a number)";
+                    cout << "Enter the decryption key:";
+                    cin >> key;
+                    cout << CaesarDec(msg , key);
+                }
+                else if (Dec_choice == 2) {
+                    flag3 = false;
+                    string line;
+                    int key;
+                    cout << "[XOR CIPHER]" << endl;
+                    cout << "(Note : Enter an additional space to confirm that the message ended)" << endl;;
+                    cout << "Enter the message you want to decrypt:" ;
+                    while (getline(cin, line) && !line.empty()) {
+                        msg += line + '\n';
+                    }
+                    if (!msg.empty() && msg.back() == '\n') {
+                        msg.pop_back();
+                    }
+                    cout << "(Note : The key must be a number)";
+                    cout << "Enter the decryption key:";
+                    cin >> key;
+                    cout << XOREncDec(msg, key);
+                }
+                else if (Dec_choice == 3) {
+                    flag3 = false;
+                    string key;
+                    cout << "[VIGENÈRE CIPHER]" << endl;
+                    cout << "Enter the text you want to decrypt:" ;
+                    getline(cin , msg);
+                    cout << "(Note : The key must consist of letters)" << endl;
+                    cout << "Enter the decryption key:";
+                    getline(cin , key);
+                    cout << VigenèreDec(msg , key);
+                }
+                else if (Dec_choice == 4) {
+                    flag3 = false;
+                    cout << "[ATBASH CIPHER]" << endl;
+                    cout << "Enter the text you want to decrypt:";
+                    getline(cin , msg);
+                    cout << AtbashEncDec (msg);
+                }
+                else {
+                    cout << "Enter a valid number :";
+                }
             }
-            if (!msg.empty() && msg.back() == '\n') {
-                msg.pop_back();
-            }
-            cout << "Enter the decryption key:";
-            cin >> key;
-            cout << XOREncDec(msg, key);
         }
-        else if (Dec_choice == 3) {
-            string msg , key;
-            cout << "Enter the text you want to decrypt:" ;
-            getline(cin , msg);
-            cout << "(Note : The key must be consisting of letters)" << endl;
-            cout << "Enter the decryption key:";
-            getline(cin , key);
-            cout << VigenèreDec(msg , key);
-        }
-        else if (Dec_choice == 4) {
-            string msg;
-            cout << "Enter the text you want to decrypt:";
-            getline(cin , msg);
-            cout << AtbashEncDec (msg);
+        else {
+            cout << "Enter a valid number :";
         }
     }
 
 }
-
-
-
-
-
-
 
 
 
