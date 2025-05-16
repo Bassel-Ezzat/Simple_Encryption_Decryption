@@ -12,6 +12,8 @@ string VigenèreEnc (string msg , string key);
 
 string VigenèreDec (string msg , string key);
 
+string AtbashEncDec (string msg);
+
 int main () {
     int EncorDec;
     cout << "1- Encrypt" << endl << "2- Decrypt" << endl;
@@ -20,7 +22,7 @@ int main () {
         int Enc_choice;
         cout << "Choose The Encryption method :" << endl
         << "1- Caesar Cipher" << endl << "2- XOR Cipher" << endl
-        << "3- Vigenere Cipher" << endl;
+        << "3- Vigenere Cipher" << endl << "4- Atbash Cipher" << endl;
         cin >> Enc_choice;
         cin.ignore();
         if (Enc_choice == 1) {
@@ -32,7 +34,7 @@ int main () {
             cin >> key;
             cout << CaesarEnc(msg , key);
         }
-        if (Enc_choice == 2) {
+        else if (Enc_choice == 2) {
             string msg, line;
             int key;
             cout << "Enter the text you want to encrypt:" ;
@@ -41,13 +43,20 @@ int main () {
             cin >> key;
             cout << XOREncDec(msg, key);
         }
-        if (Enc_choice == 3) {
+        else if (Enc_choice == 3) {
             string msg , key;
             cout << "Enter the text you want to encrypt:" ;
             getline(cin , msg);
+            cout << "(Note : The key must be consisting of letters)" << endl;
             cout << "Enter the encryption key:";
             getline(cin , key);
             cout << VigenèreEnc(msg , key);
+        }
+        else if (Enc_choice == 4) {
+            string msg;
+            cout << "Enter the text you want to encrypt:";
+            getline(cin , msg);
+            cout << AtbashEncDec (msg);
         }
     }
     else if (EncorDec == 2) {
@@ -66,7 +75,7 @@ int main () {
             cin >> key;
             cout << CaesarDec(msg , key);
         }
-        if (Dec_choice == 2) {
+        else if (Dec_choice == 2) {
             string msg, line;
             int key;
             cout << "(Note : Enter an additional space to confirm that the message ended)" << endl;;
@@ -81,13 +90,20 @@ int main () {
             cin >> key;
             cout << XOREncDec(msg, key);
         }
-        if (Dec_choice == 3) {
+        else if (Dec_choice == 3) {
             string msg , key;
             cout << "Enter the text you want to decrypt:" ;
             getline(cin , msg);
+            cout << "(Note : The key must be consisting of letters)" << endl;
             cout << "Enter the decryption key:";
             getline(cin , key);
             cout << VigenèreDec(msg , key);
+        }
+        else if (Dec_choice == 4) {
+            string msg;
+            cout << "Enter the text you want to decrypt:";
+            getline(cin , msg);
+            cout << AtbashEncDec (msg);
         }
     }
 
@@ -113,6 +129,7 @@ int main () {
 
 // Caesar Cipher Encryption
 string CaesarEnc (string msg , int key) {
+
     for (int i = 0; i < msg.length(); i++) {
         if (isupper(msg[i])) {
             msg[i] = (( msg[i] - 'A' + key ) % 26) + 'A' ;
@@ -127,6 +144,7 @@ string CaesarEnc (string msg , int key) {
 
 // Caesar Cipher Decryption
 string CaesarDec (string dec , int key) {
+
     for (int i = 0; i < dec.length(); i++) {
         if (isupper(dec[i])) {
             dec[i] = (( dec[i] - 'A' - key) % 26) + 'A' ;
@@ -141,6 +159,7 @@ string CaesarDec (string dec , int key) {
 
 //XOR Encryption and Decryption
 string XOREncDec (string msg , int key) {
+
     for (int i = 0 ; i < msg.size() ; i++) {
         msg[i] = msg[i] ^ key;
     }
@@ -148,6 +167,7 @@ string XOREncDec (string msg , int key) {
 }
 
 string VigenèreEnc (string msg , string key) {
+
     for (int i = 0 ; i < key.size() ; i++) {
         if (key[i] >= 'a' && key[i] <= 'z') {
             key[i] = toupper(key[i]);
@@ -169,6 +189,7 @@ string VigenèreEnc (string msg , string key) {
 }
 
 string VigenèreDec (string msg , string key) {
+
     for (int i = 0 ; i < key.size() ; i++) {
         if (key[i] >= 'a' && key[i] <= 'z') {
             key[i] = toupper(key[i]);
@@ -184,6 +205,19 @@ string VigenèreDec (string msg , string key) {
         else if (msg[i] >= 'a' && msg[i] <= 'z' ){
             msg[i] = ((msg[i] - 'a' - (k - 'A') + 26) % 26) + 'a';
             j++;
+        }
+    }
+    return msg;
+}
+
+string AtbashEncDec (string msg) {
+
+    for (int i = 0 ; i < msg.size() ; i++) {
+        if (msg[i] >= 'A' && msg[i] <= 'Z' ) {
+            msg[i] = 'Z' - msg[i] + 'A';
+        }
+        else if (msg[i] >= 'a' && msg[i] <= 'z' ) {
+            msg[i] = 'z' - msg[i] + 'a';
         }
     }
     return msg;
