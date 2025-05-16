@@ -8,6 +8,8 @@ string CaesarDec (string dec , int key);
 
 string XOREncDec (string msg , int key);
 
+string Vigenère (string msg , string key);
+
 int main () {
     int EncorDec;
     cout << "1- Encrypt" << endl << "2- Decrypt" << endl;
@@ -36,6 +38,14 @@ int main () {
             cout << "Enter the encryption key:";
             cin >> key;
             cout << XOREncDec(msg, key);
+        }
+        if (Enc_choice == 3) {
+            string msg , key;
+            cout << "Enter the text you want to encrypt:" ;
+            getline(cin , msg);
+            cout << "Enter the encryption key:";
+            getline(cin , key);
+            cout << Vigenère(msg , key);
         }
     }
     else if (EncorDec == 2) {
@@ -123,6 +133,27 @@ string CaesarDec (string dec , int key) {
 string XOREncDec (string msg , int key) {
     for (int i = 0 ; i < msg.size() ; i++) {
         msg[i] = msg[i] ^ key;
+    }
+    return msg;
+}
+
+string Vigenère (string msg , string key) {
+    for (int i = 0 ; i < key.size() ; i++) {
+        if (key[i] >= 'a' && key[i] <= 'z') {
+            key[i] = toupper(key[i]);
+        }
+    }
+    int j = 0;
+    for (int i = 0 ; i < msg.size() ; i++) {
+        char k = key[j % key.size()];
+        if (msg[i] >= 'A' && msg[i] <= 'Z' ) {
+            msg[i] = ((msg[i] - 'A' + (k - 'A')) % 26) + 'A';
+            j++;
+        }
+        else if (msg[i] >= 'a' && msg[i] <= 'z' ){
+            msg[i] = ((msg[i] - 'a' + (k - 'A')) % 26) + 'a';
+            j++;
+        }
     }
     return msg;
 }
