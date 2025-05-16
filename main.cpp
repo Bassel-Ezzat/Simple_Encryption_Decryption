@@ -6,6 +6,8 @@ string CaesarEnc (string msg , int key);
 
 string CaesarDec (string dec , int key);
 
+string XOREncDec (string msg , int key);
+
 int main () {
     int EncorDec;
     cout << "1- Encrypt" << endl << "2- Decrypt" << endl;
@@ -26,6 +28,21 @@ int main () {
             cin >> key;
             cout << CaesarEnc(msg , key);
         }
+        if (Enc_choice == 2) {
+            string msg, line;
+            int key;
+            cout << "(Note : Enter an additional space to confirm that the message ended)";
+            cout << "Enter the text you want to encrypt:" ;
+            while (getline(cin, line) && !line.empty()) {
+                msg += line + '\n';
+            }
+            if (!msg.empty() && msg.back() == '\n') {
+                msg.pop_back();
+            }
+            cout << "Enter the encryption key:";
+            cin >> key;
+            cout << XOREncDec(msg, key);
+        }
     }
     else if (EncorDec == 2) {
         int Dec_choice;
@@ -37,11 +54,26 @@ int main () {
         if (Dec_choice == 1) {
             int key ;
             string msg;
-            cout << "Enter the text you want to Decrypt:" ;
+            cout << "Enter the message you want to decrypt:" ;
             getline(cin , msg);
-            cout << "Enter the Decryption key:";
+            cout << "Enter the decryption key:";
             cin >> key;
             cout << CaesarDec(msg , key);
+        }
+        if (Dec_choice == 2) {
+            string msg, line;
+            int key;
+            cout << "(Note : Enter an additional space to confirm that the message ended)";
+            cout << "Enter the message you want to decrypt:" ;
+            while (getline(cin, line) && !line.empty()) {
+                msg += line + '\n';
+            }
+            if (!msg.empty() && msg.back() == '\n') {
+                msg.pop_back();
+            }
+            cout << "Enter the decryption key:";
+            cin >> key;
+            cout << XOREncDec(msg, key);
         }
     }
 
@@ -90,4 +122,13 @@ string CaesarDec (string dec , int key) {
         }
     }
     return dec;
+}
+
+
+//XOR Encryption and Decryption
+string XOREncDec (string msg , int key) {
+    for (int i = 0 ; i < msg.size() ; i++) {
+        msg[i] = msg[i] ^ key;
+    }
+    return msg;
 }
