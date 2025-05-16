@@ -8,7 +8,9 @@ string CaesarDec (string dec , int key);
 
 string XOREncDec (string msg , int key);
 
-string Vigenère (string msg , string key);
+string VigenèreEnc (string msg , string key);
+
+string VigenèreDec (string msg , string key);
 
 int main () {
     int EncorDec;
@@ -45,7 +47,7 @@ int main () {
             getline(cin , msg);
             cout << "Enter the encryption key:";
             getline(cin , key);
-            cout << Vigenère(msg , key);
+            cout << VigenèreEnc(msg , key);
         }
     }
     else if (EncorDec == 2) {
@@ -78,6 +80,14 @@ int main () {
             cout << "Enter the decryption key:";
             cin >> key;
             cout << XOREncDec(msg, key);
+        }
+        if (Dec_choice == 3) {
+            string msg , key;
+            cout << "Enter the text you want to decrypt:" ;
+            getline(cin , msg);
+            cout << "Enter the decryption key:";
+            getline(cin , key);
+            cout << VigenèreDec(msg , key);
         }
     }
 
@@ -137,7 +147,7 @@ string XOREncDec (string msg , int key) {
     return msg;
 }
 
-string Vigenère (string msg , string key) {
+string VigenèreEnc (string msg , string key) {
     for (int i = 0 ; i < key.size() ; i++) {
         if (key[i] >= 'a' && key[i] <= 'z') {
             key[i] = toupper(key[i]);
@@ -152,6 +162,27 @@ string Vigenère (string msg , string key) {
         }
         else if (msg[i] >= 'a' && msg[i] <= 'z' ){
             msg[i] = ((msg[i] - 'a' + (k - 'A')) % 26) + 'a';
+            j++;
+        }
+    }
+    return msg;
+}
+
+string VigenèreDec (string msg , string key) {
+    for (int i = 0 ; i < key.size() ; i++) {
+        if (key[i] >= 'a' && key[i] <= 'z') {
+            key[i] = toupper(key[i]);
+        }
+    }
+    int j = 0;
+    for (int i = 0 ; i < msg.size() ; i++) {
+        char k = key[j % key.size()];
+        if (msg[i] >= 'A' && msg[i] <= 'Z' ) {
+            msg[i] = ((msg[i] - 'A' - (k - 'A') + 26) % 26) + 'A';
+            j++;
+        }
+        else if (msg[i] >= 'a' && msg[i] <= 'z' ){
+            msg[i] = ((msg[i] - 'a' - (k - 'A') + 26) % 26) + 'a';
             j++;
         }
     }
