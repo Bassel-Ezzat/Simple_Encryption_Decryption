@@ -70,6 +70,7 @@ int main () {
             getline(cin , key);
             for (int i = 0 ; i < key.size() ; i++) {
                 if (!(key[i] <= 'z' && key[i] >= 'a' ) && !(key[i] <= 'Z' && key[i] >= 'A' ) && (key[i] != ' ')) {
+                    cout << "Key must only consist of letters , try again :";
                     goto Enc_key3_input;
                 }
             }
@@ -142,6 +143,7 @@ int main () {
             getline(cin , key);
             for (int i = 0 ; i < key.size() ; i++) {
                 if (!(key[i] <= 'z' && key[i] >= 'a' ) && !(key[i] <= 'Z' && key[i] >= 'A' )) {
+                    cout << "Key must only consist of letters , try again :";
                     goto Dec_key3_input;
                 }
             }
